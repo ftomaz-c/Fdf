@@ -6,7 +6,7 @@
 /*   By: ftomazc < ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 15:07:28 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2024/05/30 18:22:10 by ftomazc          ###   ########.fr       */
+/*   Updated: 2024/05/30 18:27:03 by ftomazc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ int	main(int argc, char **argv)
 
 	data_init(&data);
 	if (argc != 2)
-		return(1) ;
+		return (1) ;
 	read_map(argv[1], &data);
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, data.display_size_x,

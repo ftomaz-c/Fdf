@@ -6,7 +6,7 @@
 /*   By: ftomazc < ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 20:20:44 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2024/05/30 15:27:00 by ftomazc          ###   ########.fr       */
+/*   Updated: 2024/05/30 18:26:21 by ftomazc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ typedef struct s_data
 	int		width;
 	int		height;
 	int		**matrix;
-	int		zoom;
-	int		color;
 	float	x_matrix;
 	float	y_matrix;
 	float	x_rotation;
@@ -65,9 +63,5 @@ typedef struct s_data
 	void	*mlx;
 	void	*mlx_win;
 }				t_data;
-
-void	read_map(char *file_name, t_data *data);
-void	draw_line(float x, float y, float x1, float y1, t_data *data);
-void	draw_map(t_data *data);
 
 #endif
