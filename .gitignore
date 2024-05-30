@@ -1,0 +1,5 @@
+*.o
+*.zip
+*.tgz
+
+/mlx_linux
