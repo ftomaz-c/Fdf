@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ftomazc < ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 15:07:28 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/12/14 23:25:45 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:22:10 by ftomazc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,30 +92,14 @@ int	get_number(char *line, int start)
 
 void get_active_display_size(t_data *data)
 {
-	int		fd;
-	char	*line;
-	int		i;
+	Display	*display;
+	Screen	*screen;
 
-	fd = open("/sys/class/graphics/fb0/modes", O_RDONLY);
-	if (fd == -1)
-	{
-		perror("Error opening file");
-		exit(EXIT_FAILURE);
-	}
-	line = get_next_line(fd);
-	i = 0;
-	while (line[i] != ':')
-		i++;
-	i++;
-	data->display_size_x = get_number(line, i);
-	printf ("%d\n", data->display_size_x);
-	while (line[i] != 'x')
-		i++;
-	i++;
-	data->display_size_y = get_number(line, i);
-	printf ("%d\n", data->display_size_y);
-	free(line);
-	close(fd);
+	display = XOpenDisplay(NULL);
+	screen = DefaultScreenOfDisplay(display);
+	data->display_size_x = screen->width - 100;
+	data->display_size_y = screen->height - 100;
+	XCloseDisplay(display);
 }
 
 void	free_matrix(t_data *data)
@@ -204,7 +188,7 @@ void	data_init(t_data *data)
 	data->matrix = NULL;
 	data->mlx = NULL;
 	data->mlx_win = NULL;
-	data->zoom = 0;
+	data->zoom = 30;
 	data->x_matrix = (data->display_size_x / 2) - data->width;
 	data->y_matrix = (data->display_size_y / 2) - data->height;
 	data->x_rotation = 0;
@@ -217,29 +201,11 @@ int	main(int argc, char **argv)
 
 	data_init(&data);
 	if (argc != 2)
-		return(1);
+		return(1) ;
 	read_map(argv[1], &data);
 	data.mlx = mlx_init();
-	data.mlx_win = mlx_new_window(data.mlx, data.display_size_x,\
-								data.display_size_y, "Fdf");
-	draw_map(&data);
-
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < data.height)
-	{
-		x = 0;
-		while (x < data.width)
-		{
-			printf("%3i", data.matrix[y][x]);
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
-
-	mlx_hook(data.mlx_win, 2, 1L<<0, deal_key, &data);
+	data.mlx_win = mlx_new_window(data.mlx, data.display_size_x,
+			data.display_size_y, "Fdf");
 	mlx_loop(data.mlx);
+	close_program(&data);
 }

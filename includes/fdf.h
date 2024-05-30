@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ftomazc < ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 20:20:44 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/12/14 23:25:54 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:27:00 by ftomazc          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@
 # include "../src/libft/includes/libft.h"
 # include <X11/keysym.h>
 # include <X11/X.h>
+# include <X11/Xlib.h>
 # include <math.h>
 # include <fcntl.h>
 
-typedef struct	s_data
+typedef struct s_data
 {
 	int		display_size_x;
 	int		display_size_y;
